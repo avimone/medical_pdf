@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39764699898",
+    "project_id": "medical-334bc",
+    "storage_bucket": "medical-334bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39764699898:android:040fb3b677b8e77edbf743",
+        "android_client_info": {
+          "package_name": "com.gadgetspidy.medical_pdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39764699898-e70ohqhf38t8jqpfg80k0h4h64hnbq5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCArblnL_EwGB_78pqhRtyQiW7_ooQqDeQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39764699898-e70ohqhf38t8jqpfg80k0h4h64hnbq5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
