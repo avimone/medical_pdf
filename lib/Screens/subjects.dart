@@ -80,6 +80,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Subjects"),
+        backgroundColor: Color(0xFF9D1B6F),
         actions: [
           IconButton(
               icon: Icon(Icons.add),
@@ -94,7 +95,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               )
             : Container(
                 height: double.infinity,
-                padding: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 5, bottom: 5),
                 color: Color(0xFFEEF5DB),
                 child: ListView.builder(
                     itemCount: filteredList.length,
@@ -103,7 +104,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                       return Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Color(0xFFB8D8D8),
+                            color: Color(0xFF45CDE1),
                           ),
                           margin: EdgeInsets.only(top: 3, left: 5, right: 5),
                           child: ListTile(

@@ -18,21 +18,27 @@ class _NewItemState extends State<NewItem> {
 
   void _submitData() {
     final enteredTitle = _titleController.text;
-    final enteredLink = _linkController.text;
-    final enteredImage = _imageController.text;
+    var enteredLink = _linkController.text;
+    var enteredImage = _imageController.text;
     final enteredId = int.parse(_idController.text);
-    if (enteredId != 1989 || enteredId == null) {
-      _showMyDialog();
-    } else {
-      widget.addTx(
-        enteredTitle,
-        enteredId,
-        enteredLink,
-        enteredImage,
-      );
 
-      Navigator.of(context).pop();
-    }
+    enteredLink = "https://gadgetspidy.com/medical/";
+
+    enteredImage =
+        "https://gadgetspidy.com/petroleum_images/No_Image_Available.png";
+
+    /*  if (enteredId != 1989 || enteredId == null) {
+      _showMyDialog();
+    } else { */
+    widget.addTx(
+      enteredTitle,
+      enteredId,
+      enteredImage,
+      enteredLink,
+    );
+
+    Navigator.of(context).pop();
+    /*  } */
   }
 
   Future<void> _showMyDialog() async {

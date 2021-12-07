@@ -1,4 +1,4 @@
-package com.example.medical_pdf
+package com.gadgetspidy.medical_pdf
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -39,10 +39,10 @@ class Books extends ChangeNotifier {
       String id, String name, String link, String imageUrl) async {
     try {
       var url = 'https://medical-334bc-default-rtdb.firebaseio.com/books.json';
-
+      print("adding");
       final response = await http.post(url,
           body: json.encode({
-            'id': id,
+            'id': "All",
             'name': name,
             'link': link,
             'imageUrl': imageUrl,

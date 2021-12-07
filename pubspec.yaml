@@ -61,7 +61,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
    assets:
-    - assets/4050589.jpg
     - assets/Apley_solomon_system_of_orthopaedics_and_trauma.jpeg
     - assets/Textbook_of_Orthopedics.jpeg
     - assets/Textbook_of_Anatomy_Abdomen_LowerLimb.jpeg
