@@ -48,7 +48,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.gadgetspidy.medical_pdf"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
