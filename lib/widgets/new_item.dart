@@ -54,34 +54,6 @@ class _NewItemState extends State<NewItem> {
     /*  } */
   }
 
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Alert!!! Data only entered by admin'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('you can mail details to 40avirajpatel@gmail.com'),
-                Text('or whatsapp details to 7014799875'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Okay'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

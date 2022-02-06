@@ -144,6 +144,35 @@ class _HomeScreenState extends State<HomeScreen> {
       productsData.addBookRequest(
           newTx.id, newTx.name, newTx.link, newTx.imageUrl);
     });
+    _showMyDialog1();
+  }
+
+  Future<void> _showMyDialog1() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Thank you ! Your book is Submitted'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('under review'),
+                Text('your book will be available once review is done'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Okay'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _startAddNewTransaction(BuildContext ctx) {
@@ -382,7 +411,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 _startAddNewTransaction(context);
 
-                final productsData = Provider.of<Books>(context, listen: false);
+                // final productsData = Provider.of<Books>(context, listen: false);
 /*                 for (var i in listOfBooks) {
                   productsData.addBook(
                       "All",
