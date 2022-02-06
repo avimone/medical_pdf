@@ -8,30 +8,13 @@ class ViewPDF extends StatelessWidget {
   ViewPDF({this.pathPDF});
   @override
   Widget build(BuildContext context) {
-    Future<bool> _onWillPop() async {
-      return (await showDialog(
-            context: context,
-            builder: (context) => new AlertDialog(
-              title: new Text('Are you sure?'),
-              content: new Text('Do you want to exit an App'),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: new Text('No'),
-                ),
-                new FlatButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: new Text('Yes'),
-                ),
-              ],
-            ),
-          )) ??
-          false;
-    }
 
     return PDFViewerScaffold(
         //view PDF
-
+appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0), // here the desired height
+          child: AppBar(title: Text("PDF"),    flexibleSpace: IconButton(onPressed: (){Navigator.of(context).pop();},icon: Icon(Icons.arrow_back),),
+)),
         primary: false,
         path: pathPDF);
   }

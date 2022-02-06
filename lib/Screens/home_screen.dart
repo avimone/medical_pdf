@@ -12,11 +12,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medical_pdf/model/books.dart';
 import 'package:medical_pdf/model/book.dart';
-import 'package:flutter_native_admob/flutter_native_admob.dart';
 
 import 'package:dio/dio.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'dart:io' show Platform;
 const String testDevice = '98E429C622AAB67C2E6328A3D812DE27';
 
 class HomeScreen extends StatefulWidget {
@@ -114,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //  var downloaded = false;
   var _isLoading = false;
   final InterstitialAd myInterstitial = InterstitialAd(
-    adUnitId: 'ca-app-pub-4408166895540676/8752103666',
+    adUnitId:Platform.isIOS ? 'ca-app-pub-4408166895540676/8550898152': 'ca-app-pub-4408166895540676/8752103666',
     request: AdRequest(),
     listener: AdListener(),
   );
@@ -301,15 +300,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       var filename = book.name;
-      var dir = await getExternalStorageDirectory();
-      if (await File("${dir.path}/$filename.pdf").exists()) {
+      Directory dir = Platform.isIOS ?  await getApplicationDocumentsDirectory() : await getExternalStorageDirectory();
+      var pathName = dir.path ;
+      if (await File("${pathName}/$filename.pdf").exists()) {
         setState(() {
           book.downloaded = true;
         });
         return;
       }
-      print(dir.path);
-      await dio.download(book.link, "${dir.path}/$filename.pdf",
+      print(pathName);
+      await dio.download(book.link, "${pathName}/$filename.pdf",
           onReceiveProgress: (rec, total) {
         print("Rec: $rec , Total: $total");
 
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
           prefs.setString("file", filename).then((bool success) {
             return filename;
           });
-          book.pdfpath = "${dir.path}/$filename.pdf";
+          book.pdfpath = "${pathName}/$filename.pdf";
         });
       });
     } catch (e) {
@@ -344,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> checkFile(Book book) async {
     try {
       var filename = book.name;
-      var dir = await getExternalStorageDirectory();
+      Directory dir = Platform.isIOS ?  await getApplicationDocumentsDirectory() : await getExternalStorageDirectory();
       if (await File("${dir.path}/$filename.pdf").exists()) {
         setState(() {
           book.downloaded = true;
@@ -361,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> deleteFile(Book book) async {
     try {
       var filename = book.name;
-      var dir = await getExternalStorageDirectory();
+      Directory dir = Platform.isIOS ?  await getApplicationDocumentsDirectory() : await getExternalStorageDirectory();
       if (await File("${dir.path}/$filename.pdf").exists()) {
         File("${dir.path}/$filename.pdf").delete();
 
@@ -380,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print(progress);
     print(progressItem);
     if (progress > 0 && progress != 100) {
-      var dir = await getExternalStorageDirectory();
+      Directory dir = Platform.isIOS ?  await getApplicationDocumentsDirectory() : await getExternalStorageDirectory();
 
       if (await File("${dir.path}/$progressItem.pdf").exists()) {
         File("${dir.path}/$progressItem.pdf").delete();
