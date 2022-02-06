@@ -64,6 +64,35 @@ class Books extends ChangeNotifier {
     }
   }
 
+  Future<void> addBookRequest(
+      String id, String name, String link, String imageUrl) async {
+    try {
+      var url = 'https://medical-334bc-default-rtdb.firebaseio.com/bookrq.json';
+      print("adding request");
+      final response = await http.post(url,
+          body: json.encode({
+            'id': "All",
+            'name': name,
+            'link': link,
+            'imageUrl': imageUrl,
+            //  'creatorid': userId
+          }));
+
+      final newProduct = Book(
+        name: name,
+        link: link,
+        imageUrl: imageUrl,
+        //     imageUrl: imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
   Future<void> fetchAndSetBooks() async {
     var url = 'https://medical-334bc-default-rtdb.firebaseio.com/books.json';
     try {

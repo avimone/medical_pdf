@@ -34,12 +34,12 @@ class _NewSubjectState extends State<NewSubject> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alert!!! Data only entered by admin'),
+          title: Text('Thank you your subject is submitted'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('you can mail details to 40avirajpatel@gmail.com'),
-                Text('or whatsapp details to 7014799875'),
+                Text('under verification'),
+                Text('you subject will available soon'),
               ],
             ),
           ),
