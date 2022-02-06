@@ -17,19 +17,32 @@ class _NewItemState extends State<NewItem> {
   final _idController = TextEditingController();
 
   void _submitData() {
-    final enteredTitle = _titleController.text;
+    var enteredTitle = _titleController.text;
     var enteredLink = _linkController.text;
     var enteredImage = _imageController.text;
-    final enteredId = int.parse(_idController.text);
+    var enteredId = int.parse(_idController.text);
 
-    enteredLink = "https://gadgetspidy.com/medical/";
+    // enteredLink = "https://gadgetspidy.com/medical/";
 
-    enteredImage =
-        "https://gadgetspidy.com/petroleum_images/No_Image_Available.png";
+    //  enteredImage =
+    //    "https://gadgetspidy.com/petroleum_images/No_Image_Available.png";
 
     /*  if (enteredId != 1989 || enteredId == null) {
       _showMyDialog();
     } else { */
+    if (enteredLink == null) {
+      enteredLink = "https://gadgetspidy.com/medical/";
+    }
+    if (enteredImage == null) {
+      enteredImage =
+          "https://gadgetspidy.com/petroleum_images/No_Image_Available.png";
+    }
+    if (enteredId == null) {
+      enteredId = 111;
+    }
+    if (enteredTitle == null) {
+      enteredTitle = "null";
+    }
     widget.addTx(
       enteredTitle,
       enteredId,

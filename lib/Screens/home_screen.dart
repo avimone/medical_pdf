@@ -31,75 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   SharedPreferences prefs;
   TextEditingController _searchController = TextEditingController();
   FocusNode _search = FocusNode();
-  List<String> listOfBooks = [
-    "Current Diagnosis _ Treatment Obstetrics _ Gynecology (2012, McGraw-Hill Medical)",
-    "Current Medical Diagnosis and Treatment Flashcards (2013, McGraw-Hill)",
-    "Current Medical Diagnosis and Treatment Study Guide (2015, McGraw-Hill)",
-    "Current-Diagnosis-and-Treatment-Surgery",
-    "Davidson_s Essentials of Medicine, 2e (2015, Churchill Livingstone)",
-    "Davidson's Principles and practice of medicine (2018, Elsevier)",
-    "Davidson's Self-assessment in Medicine (2018, Elsevier)",
-    "DIAGNOSTIC ULTRASOUND",
-    "Essentials-of-Kumar-Clark-s-Clinical-Medicine",
-    "Ghai Essential Pediatrics, 9e (2018, CBS Publishers _ Distributors_)",
-    "Ghai Essential Pediatrics",
-    "Goldman-Cecil-Medicine",
-    "Gynaecological Instruments",
-    "Hamilton-Bailey-s-Physical-Signs-Demonstrations-of-Physical-Signs-in-Clinical-Surgery",
-    "Harrison_s Manual of Medicine-McGraw-Hill (2016)",
-    "Harrison_s Principles of Internal Medicine (19th Edition)",
-    "HARRISON'S INFECTIOUS DISEASES 3rd Edition",
-    "Hiralal Konar-DC Dutta_s Textbook of Gynecology-Jaypee Brothers (2014)",
-    "Hiralal Konar-DC Dutta_s Textbook of Obstetrics_ Including Perinatology and Contraception-JP Medical Pub",
-    "Hutchison's Clinical Methods_ An Integrated Approach to Clinical Practice (2017, Elsevier)",
-    "J. Maheshwari, Vikram A. Mhaskar - Essential Orthopaedics (2015, Jaypee Brothers Medical Pub)",
-    "Jorge Muniz - Medcomic The Most Entertaining Way to Study Medicine (2018, Jorge Muniz)",
-    "K. George Mathew, Praveen Aggarwal - Medicine_ Prep Manual for Undergraduates (2015, Elsevier India)",
-    "Kumar _ Clark's Tien - Kumar _ Clark's Clinical Medicine 9e (2016)",
-    "Lorraine M Sdrales, Ronald D. Miller - Miller's Anesthesia Review (2012, Saunders)",
-    "Macleod_s Clinical Examination 14th Edition",
-    "Macleod's Clinical Examination-Churchill Livingstone",
-    "Manuel Pardo, Ronald D. Miller - Basics of Anesthesia (2017, Elsevier)",
-    "Maxine A. Papadakis, Stephen J. McPhee, Michael W. Rabow - Current Medical Diagnosis _ Treatment",
-    "Mayo Clinic Scientific Press Lyell Jones, Kelly Flemming - Mayo Clinic Neurology Board Review_ Basic Sciences and Psychiatry for Initial Certification",
-    "Medcomic-The-Most-Entertaining-Way-to-Study-Medicine",
-    "Medical Specialty Board Review Rajesh Tampi, Kristina Zdanys, Mark Oldham - Psychiatry _ a comprehensive board review",
-    "Michael South, Maxwell J. Robinson, David Isaacs MB BChir MD MRCP FRACP, Don M. Roberton-Practical Paediatrics, 5th Edition ",
-    "Neena Khanna - Illustrated Synopsis Of Dermatology and Sexually Transmitted Diseases",
-    "Nelson-essentials-of-pediatrics",
-    "Nelson-Textbook-of-Pediatrics-2-Volume-Set-20e",
-    "Niraj Ahuja - A Short Textbook of Psychiatry_ 20th Year Edition",
-    "Operative Techniques In SURGERY",
-    "Oxford Handbook of Clinical Diagnosis",
-    "Oxford Handbook of Clinical Examination and Practical Skills",
-    "Oxford Handbook of Clinical Medicine",
-    "Oxford Handbook of Clinical Specialities",
-    "Oxford Handbook of Clinical Surgery",
-    "Oxford Handbook of emergency medicine",
-    "Oxford Handbook of Obstetrics and Gynaecology",
-    "Oxford medical handbooks Robert C Tasker_ Robert J McClure_ Carlo L Acerini - Oxford handbook of paediatrics",
-    "Oxorn Foote Human Labor and Birth",
-    "P. J. Mehta - Practical Medicine",
-    "Paediatrics -O.P. Ghai",
-    "Parveen Kumar, Michael L Clark - Kumar and Clark_s Clinical Medicine",
-    "Paula Derr, Jon Tardiff, Mike McEvoy - Emergency  _  Critical Care Pocket Guide, ACLS version",
-    "Perspectives-on-Practice",
-    "Pocket-Medicine-The-Massachusetts-General-Hospital-Handbook-of-Internal-Medicine",
-    "practical-aspects-of-pediatrics-5th-edition",
-    "Rajat Jain - Review of Radiology (2016, Jaypee Brothers Medical Publishers)",
-    "Review - Harrison's principles of internal medicine, self-assessment and board review",
-    "S.DAS CLINICAL SURGERY",
-    "Sabiston-Textbook-of-Surgery-Missing-Pages-ONLY",
-    "Sabiston-Textbook-of-Surgery-The-Biological-Basis-of-Modern-Surgical-Practice",
-    "Schwartz_s Principles of Surgery",
-    "Shaw's  Textbook of Gynaecology",
-    "SRB Manual of Surgery 5th Edition",
-    "Systolic murmur",
-    "The Handbook of Fracture",
-    "Tintinalli's Emergency Medicine Manual-McGraw-Hill",
-    "Tom Lissauer_ Graham Clayden-Illustrated Textbook of Paediatrics _ With STUDENT CONSULT Online Access-Elsevier Health Sciences UK, Mosby",
-    "Williams Obstetrics 24th Ed",
-  ];
+  List<String> listOfBooks = [];
   String assetPDFPath = "";
   List<String> urlPDFPath = [];
   var _isInit = true;
@@ -209,7 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
     //   print(id);
     setState(() {
       final productsData = Provider.of<Books>(context, listen: false);
-      productsData.addBook(newTx.id, newTx.name, newTx.link, newTx.imageUrl);
+      productsData.addBookRequest(
+          newTx.id, newTx.name, newTx.link, newTx.imageUrl);
     });
   }
 
@@ -447,14 +380,14 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                //    _startAddNewTransaction(context);
+                _startAddNewTransaction(context);
 
-                /*    final productsData = Provider.of<Books>(context, listen: false);
-                for (var i in listOfBooks) {
+                final productsData = Provider.of<Books>(context, listen: false);
+/*                 for (var i in listOfBooks) {
                   productsData.addBook(
                       "All",
                       i,
-                      "https://gadgetspidy.com/medical/",
+                      "https://gadgetspidy.com/medical/$i",
                       "https://gadgetspidy.com/petroleum_images/No_Image_Available.png");
                 } */
               }),
