@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:medical_pdf/model/analytics.dart';
 import 'package:medical_pdf/widgets/new_item.dart';
 import 'package:medical_pdf/widgets/pdfview.dart';
 import 'package:path_provider/path_provider.dart';
@@ -94,6 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void _submitData(List<Book> products, String val) {
     final enteredVal = _searchController.text;
     valueSearch = _searchController.text;
+    analytics.logEvent(name: "search_book", parameters: {"search": val});
+    mixpanel.track('search_book', properties: {"search": val});
     setState(() {
       filteredList = products
           .where((element) =>
@@ -206,20 +209,29 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<Books>(context).fetchAndSetBooks().then((_) {
         var books = Provider.of<Books>(context, listen: false);
         var bookList = books.items;
-
-        setState(() {
-          var showBook = bookList
-              .where((element) =>
-                  element.id.toLowerCase().contains(widget.type.toLowerCase()))
-              .toList();
-          print(bookList);
-          print(showBook);
-          filteredList = showBook;
-          confirmDownload();
-          _isLoading = false;
-        });
+        if (widget.type == "All") {
+          setState(() {
+            filteredList = bookList;
+            confirmDownload();
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            var showBook = bookList
+                .where((element) => element.name
+                    .toLowerCase()
+                    .contains(widget.type.toLowerCase()))
+                .toList();
+            print(bookList);
+            print(showBook);
+            filteredList = showBook;
+            confirmDownload();
+            _isLoading = false;
+          });
+        }
       });
     }
+
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -260,7 +272,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> downloadFile(Book book, String todo) async {
     Dio dio = Dio();
-
+    analytics.logEvent(name: "book_download", parameters: {"name": book.name});
+    mixpanel.track("book_download", properties: {"name": book.name});
     try {
       var filename = book.name;
       var dir = await getExternalStorageDirectory();
@@ -649,10 +662,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                         link: books[i].link,
                                       )));
                         } */
-
+                              analytics
+                                  .logEvent(name: "book_click", parameters: {
+                                "name": filteredList[i].name,
+                                "id": filteredList[i].id,
+                              });
+                              mixpanel.track("book_click", properties: {
+                                "name": filteredList[i].name,
+                                "id": filteredList[i].id,
+                              });
                               if (filteredList[i].pdfpath != null) {
                                 if (ongoingDownload == false) {
                                   myInterstitial.show();
+                                  analytics
+                                      .logEvent(name: "book_read", parameters: {
+                                    "name": filteredList[i].name,
+                                    "id": filteredList[i].id,
+                                  });
+                                  mixpanel.track("book_read", properties: {
+                                    "name": filteredList[i].name,
+                                    "id": filteredList[i].id,
+                                  });
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
